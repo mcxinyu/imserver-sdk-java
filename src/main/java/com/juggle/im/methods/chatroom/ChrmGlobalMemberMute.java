@@ -47,7 +47,7 @@ public class ChrmGlobalMemberMute {
         return result;
     }
 
-    public ChrmGlobalMuteMembersResult getList(Integer limit, String offset)throws Exception{
+    public ChrmGlobalMuteMembersResult list(Integer limit, String offset)throws Exception{
         String urlPath = this.juggleim.getApiUrl()+"/apigateway/chatrooms/globalmutemembers/query?";
         if(limit!=null){
             urlPath = urlPath + "&limit="+limit;
@@ -66,4 +66,5 @@ public class ChrmGlobalMemberMute {
         }
         return result;
     }
+
 }

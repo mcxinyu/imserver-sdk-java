@@ -50,11 +50,11 @@ public class UserBlock {
         return result;
     }
 
-    public BlockUsersResult qryBlockUsers(BlockUserQry query) throws Exception {
+    public BlockUsersResult queryBlockUsers(BlockUserQry query) throws Exception {
         StringBuilder params = new StringBuilder();
         params.append(this.juggleim.getApiUrl()).append("/apigateway/users/blockusers/query?");
         params.append("user_id=");
-        params.append(URLEncoder.encode(query.getUserId()));
+        params.append(URLEncoder.encode(query.getUserId(), "UTF-8"));
         params.append("&limit=");
         params.append(query.getLimit());
         params.append("&offset=");
@@ -71,6 +71,5 @@ public class UserBlock {
         }
         return result;
     }
-
 
 }

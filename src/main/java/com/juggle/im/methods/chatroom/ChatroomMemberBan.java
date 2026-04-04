@@ -47,7 +47,7 @@ public class ChatroomMemberBan {
         return result;
     }
 
-    public ChatroomBanMembersResult getList(String chatId, Integer limit, String offset)throws Exception{
+    public ChatroomBanMembersResult list(String chatId, Integer limit, String offset)throws Exception{
         String urlPath = this.juggleim.getApiUrl()+"/apigateway/chatrooms/banmembers/query?chat_id="+URLEncoder.encode(chatId, "UTF-8");
         if(limit!=null){
             urlPath = urlPath + "&limit="+limit;
@@ -66,4 +66,5 @@ public class ChatroomMemberBan {
         }
         return result;
     }
+
 }

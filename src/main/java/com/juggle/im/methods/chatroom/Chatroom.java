@@ -74,7 +74,13 @@ public class Chatroom {
     }
 
     public ChatroomInfoResult get(String chatId, int count, int order) throws Exception {
-        String urlPath = this.juggleim.getApiUrl() + "/apigateway/chatrooms/info?with_members=true&chat_id=" + URLEncoder.encode(chatId, "UTF-8");
+        return get(chatId, true, false, count, order);
+    }
+
+    public ChatroomInfoResult get(String chatId, boolean withMembers, boolean withAtts, int count, int order) throws Exception {
+        String urlPath = this.juggleim.getApiUrl() + "/apigateway/chatrooms/info?chat_id=" + URLEncoder.encode(chatId, "UTF-8");
+        urlPath = urlPath + "&with_members=" + withMembers;
+        urlPath = urlPath + "&with_atts=" + withAtts;
         urlPath = urlPath + "&count=" + count;
         urlPath = urlPath + "&order=" + order;
         HttpURLConnection conn = HttpUtil.CreateGetHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
@@ -89,7 +95,24 @@ public class Chatroom {
         return result;
     }
 
-    public ChrmMembersExistResult memberExists(ChrmMemberIds members) throws Exception {
+    public ResponseResult setMute(String chatId, boolean isMute) throws Exception {
+        String urlPath = this.juggleim.getApiUrl() + "/apigateway/chatrooms/chrmmute/set";
+        ChatroomInfo chatroomInfo = new ChatroomInfo(chatId, null).setIsMute(isMute ? 1 : 0);
+        String body = GsonUtil.toJson(chatroomInfo);
+        HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
+        HttpUtil.setBodyParameter(body, conn);
+        String response = "";
+        ResponseResult result = null;
+        try {
+            response = HttpUtil.returnResult(conn);
+            result = (ResponseResult) GsonUtil.fromJson(response, ResponseResult.class);
+        } catch (Exception e) {
+            result = new ResponseResult(500, "request:" + conn.getURL() + ",response:" + response + ",Exception:" + e.getMessage());
+        }
+        return result;
+    }
+
+    public ChrmMembersExistResult checkMembersExist(ChrmMemberIds members) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/chatrooms/members/exist";
         String body = GsonUtil.toJson(members);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);

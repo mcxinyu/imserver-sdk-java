@@ -57,7 +57,7 @@ public class SensitiveWord {
      * @return {@link ResponseResult} 返回是否成功相关信息
      * @throws Exception 异常
      */
-    public ResponseResult del(SensitiveWordDelReq delReq) throws Exception {
+    public ResponseResult remove(SensitiveWordDelReq delReq) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/sensitivewords/del";
         String body = GsonUtil.toJson(delReq);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
@@ -80,7 +80,7 @@ public class SensitiveWord {
      * @return {@link SensitiveWordResult} 返回敏感词详情
      * @throws Exception 异常
      */
-    public SensitiveWordResult page(SensitiveWordReq req) throws Exception {
+    public SensitiveWordResult list(SensitiveWordReq req) throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append(this.juggleim.getApiUrl());
         sb.append("/apigateway/sensitivewords/list");

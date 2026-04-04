@@ -48,15 +48,7 @@ public class UserBan {
         return result;
     }
 
-    /**
-     * 获取禁言用户
-     *
-     * @param limit  每页数量
-     * @param offset 偏移量
-     * @return {@link BanUsersResult} 返回被禁言用户详细信息
-     * @throws Exception
-     */
-    public BanUsersResult getList(int limit, String offset) throws Exception {
+    public BanUsersResult list(int limit, String offset) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/users/banusers/query?";
         urlPath = urlPath + "limit=" + limit;
         urlPath = urlPath + "&offset=" + offset;
@@ -72,7 +64,7 @@ public class UserBan {
         return result;
     }
 
-    public BanUsersResult getList(Integer size, Integer page) throws Exception {
+    public BanUsersResult list(Integer size, Integer page) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/users/banusers/query";
         HttpURLConnection conn = HttpUtil.CreateGetHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
         String response = "";
@@ -86,7 +78,7 @@ public class UserBan {
         return result;
     }
 
-    public BanUsersResult getList() throws Exception {
-        return getList(null, null);
+    public BanUsersResult list() throws Exception {
+        return list(null, null);
     }
 }

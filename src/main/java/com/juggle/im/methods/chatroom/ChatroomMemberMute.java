@@ -47,7 +47,7 @@ public class ChatroomMemberMute {
         return result;
     }
 
-    public ChatroomMuteMembersResult getList(String chatId, Integer limit, String offset)throws Exception{
+    public ChatroomMuteMembersResult list(String chatId, Integer limit, String offset)throws Exception{
         String urlPath = this.juggleim.getApiUrl()+"/apigateway/chatrooms/mutemembers/query?chat_id="+URLEncoder.encode(chatId, "UTF-8");
         if(limit!=null){
             urlPath = urlPath + "&limit="+limit;
@@ -66,4 +66,5 @@ public class ChatroomMemberMute {
         }
         return result;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.juggle.im.methods.user;
 
 import com.juggle.im.JuggleIm;
+import com.juggle.im.models.ResponseResult;
 import com.juggle.im.models.user.*;
 import com.juggle.im.util.GsonUtil;
 import com.juggle.im.util.HttpUtil;
@@ -74,6 +75,36 @@ public class User {
         return result;
     }
 
+    public ResponseResult setSettings(UserInfo user) throws Exception {
+        String urlPath = this.juggleim.getApiUrl() + "/apigateway/users/settings/set";
+        String body = GsonUtil.toJson(user);
+        HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
+        HttpUtil.setBodyParameter(body, conn);
+        String response = "";
+        ResponseResult result = null;
+        try {
+            response = HttpUtil.returnResult(conn);
+            result = (ResponseResult) GsonUtil.fromJson(response, ResponseResult.class);
+        } catch (Exception e) {
+            result = new ResponseResult(500, "request:" + conn.getURL() + ",response:" + response + ",Exception:" + e.getMessage());
+        }
+        return result;
+    }
+
+    public UserInfoResult getSettings(String userId) throws Exception {
+        String urlPath = this.juggleim.getApiUrl() + "/apigateway/users/settings/get?user_id=" + URLEncoder.encode(userId, "UTF-8");
+        HttpURLConnection conn = HttpUtil.CreateGetHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
+        String response = "";
+        UserInfoResult result = null;
+        try {
+            response = HttpUtil.returnResult(conn);
+            result = (UserInfoResult) GsonUtil.fromJson(response, UserInfoResult.class);
+        } catch (Exception e) {
+            result = new UserInfoResult(500, "request:" + conn.getURL() + ",response:" + response + ",Exception:" + e.getMessage(), null);
+        }
+        return result;
+    }
+
     /**
      * 更新用户信息
      *
@@ -129,7 +160,7 @@ public class User {
      * @return {@link UserStatusResult} 返回用户状态相关信息
      * @throws Exception 状态
      */
-    public UserStatusResult qryOnlineStatusByUserIds(UserStatus userStatus) throws Exception {
+    public UserStatusResult queryOnlineStatusByUserIds(UserStatus userStatus) throws Exception {
         // is need to check params before send http?
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/users/onlinestatus/query";
         String body = GsonUtil.toJson(userStatus);

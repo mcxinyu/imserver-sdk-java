@@ -33,7 +33,7 @@ public class SensitiveExample {
 //        // del sensitiveword
 //        SensitiveDelReq delReq = new SensitiveDelReq();
 //        delReq.setWords(List.of("勒塞", "肮脏的"));
-//        ResponseResult delResult = sdk.sensitiveWord.del(delReq);
+//        ResponseResult delResult = sdk.sensitiveWord.remove(delReq);
 //        System.out.println("delResult:" + delResult.toString());
 
 //        // 分页获取数据
@@ -42,7 +42,7 @@ public class SensitiveExample {
 //        pageReq.setSize(10);
 ////        pageReq.setWord("肮脏的");
 //        pageReq.setWordType(2);
-//        SensitiveWordResult pageResult = sdk.sensitiveWord.page(pageReq);
+//        SensitiveWordResult pageResult = sdk.sensitiveWord.list(pageReq);
 //        System.out.println("pageResult:" + pageResult.toString());
 
 //        // 导入文件

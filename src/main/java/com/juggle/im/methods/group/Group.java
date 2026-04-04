@@ -131,7 +131,7 @@ public class Group {
      * @return {@link ResponseResult} 返回是否成功
      * @throws Exception 异常
      */
-    public ResponseResult updGroupSettings(GroupSetting setting) throws Exception {
+    public ResponseResult updateSettings(GroupSetting setting) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/groups/settings/set";
         String body = GsonUtil.toJson(setting);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
@@ -154,7 +154,7 @@ public class Group {
      * @return {@link GroupSettingResult} 返回群配置信息
      * @throws Exception 异常
      */
-    public GroupSettingResult getGroupSettings(String groupId) throws Exception {
+    public GroupSettingResult getSettings(String groupId) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/groups/settings/get?group_id=" + URLEncoder.encode(groupId, "UTF-8");
         HttpURLConnection conn = HttpUtil.CreateGetHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
         String response = "";
@@ -222,7 +222,7 @@ public class Group {
      * @return {@link ResponseResult} 返回是否成功
      * @throws Exception 异常
      */
-    public ResponseResult groupMute(GroupMuteReq muteReq) throws Exception {
+    public ResponseResult mute(GroupMuteReq muteReq) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/groups/groupmute/set";
         String body = GsonUtil.toJson(muteReq);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
@@ -246,7 +246,7 @@ public class Group {
      * @return {@link ResponseResult} 返回是否成功信息
      * @throws Exception 异常
      */
-    public ResponseResult groupMemMute(GroupMemMuteReq memMuteReq) throws Exception {
+    public ResponseResult muteMembers(GroupMemMuteReq memMuteReq) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/groups/groupmembermute/set";
         String body = GsonUtil.toJson(memMuteReq);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
@@ -269,7 +269,7 @@ public class Group {
      * @return {@link ResponseResult} 返回是否成功信息
      * @throws Exception 异常
      */
-    public ResponseResult groupMemAllow(GroupMemAllowReq memAllowReq) throws Exception {
+    public ResponseResult allowMembers(GroupMemAllowReq memAllowReq) throws Exception {
         String urlPath = this.juggleim.getApiUrl() + "/apigateway/groups/groupmemberallow/set";
         String body = GsonUtil.toJson(memAllowReq);
         HttpURLConnection conn = HttpUtil.CreatePostHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath);
@@ -281,6 +281,29 @@ public class Group {
             result = (ResponseResult) GsonUtil.fromJson(response, ResponseResult.class);
         } catch (Exception e) {
             result = new ResponseResult(500, "request:" + conn.getURL() + ",response:" + response + ",Exception:" + e.getMessage());
+        }
+        return result;
+    }
+
+    public GroupMembersResult getMembers(String groupId, Integer limit, String offset) throws Exception {
+        StringBuilder urlPath = new StringBuilder();
+        urlPath.append(this.juggleim.getApiUrl())
+                .append("/apigateway/groups/members/query?group_id=")
+                .append(URLEncoder.encode(groupId, "UTF-8"));
+        if (limit != null) {
+            urlPath.append("&limit=").append(limit);
+        }
+        if (offset != null && !offset.isEmpty()) {
+            urlPath.append("&offset=").append(offset);
+        }
+        HttpURLConnection conn = HttpUtil.CreateGetHttpConnection(this.juggleim.getAppkey(), this.juggleim.getSecret(), urlPath.toString());
+        String response = "";
+        GroupMembersResult result = null;
+        try {
+            response = HttpUtil.returnResult(conn);
+            result = (GroupMembersResult) GsonUtil.fromJson(response, GroupMembersResult.class);
+        } catch (Exception e) {
+            result = new GroupMembersResult(500, "request:" + conn.getURL() + ",response:" + response + ",Exception:" + e.getMessage(), null);
         }
         return result;
     }

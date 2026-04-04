@@ -2,6 +2,8 @@ package com.juggle.im.models.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Map;
+
 public class UserInfo {
     @SerializedName("user_id")
     private String userId;
@@ -11,6 +13,10 @@ public class UserInfo {
     private String userPortrait;
     @SerializedName("updated_time")
     private long updatedTime;
+    @SerializedName("ext_fields")
+    private Map<String, String> extFields;
+    @SerializedName("settings")
+    private Map<String, String> settings;
 
     public UserInfo(){}
     public UserInfo(String userId, String nickname, String userPortrait){
@@ -48,5 +54,23 @@ public class UserInfo {
 
     public long getUpdatedTime(){
         return this.updatedTime;
+    }
+
+    public Map<String, String> getExtFields() {
+        return extFields;
+    }
+
+    public UserInfo setExtFields(Map<String, String> extFields) {
+        this.extFields = extFields;
+        return this;
+    }
+
+    public Map<String, String> getSettings() {
+        return settings;
+    }
+
+    public UserInfo setSettings(Map<String, String> settings) {
+        this.settings = settings;
+        return this;
     }
 }

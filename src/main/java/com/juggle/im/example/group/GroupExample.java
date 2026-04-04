@@ -54,11 +54,11 @@ public class GroupExample {
 //        Map<String, String> params = new HashMap<>(4);
 //        params.put("hide_grp_msg", "1");
 //        setting.setSettings(params);
-//        ResponseResult settingRes = sdk.group.updGroupSettings( setting);
+//        ResponseResult settingRes = sdk.group.updateSettings(setting);
 //        System.out.println("settingRes: " + settingRes.toString());
 
 //        // get group setting
-//        GroupSettingResult settingResult = sdk.group.getGroupSettings("N5zNVXSAL");
+//        GroupSettingResult settingResult = sdk.group.getSettings("N5zNVXSAL");
 //        System.out.println("groupSettingResult: " + settingResult.toString());
 
 //        GroupMemReq groupMemAdd = new GroupMemReq();
@@ -79,7 +79,7 @@ public class GroupExample {
 //        GroupMuteReq muteReq = new GroupMuteReq();
 //        muteReq.setGroupId("nE7j5Hg2U");
 //        muteReq.setIsMute(0);
-//        ResponseResult groupMuteRes = sdk.group.groupMute(muteReq);
+//        ResponseResult groupMuteRes = sdk.group.mute(muteReq);
 //        System.out.println("groupMuteResult:" + groupMuteRes.toString());
 
 //        //群指定成员禁言
@@ -90,7 +90,7 @@ public class GroupExample {
 //        memMuteReq.setIsMute(1);
 //        memMuteReq.setMuteMinute(8);
 //        memMuteReq.setMemberIds(List.of("mi8t76DVu"));
-//        ResponseResult groupMuteRes = sdk.group.groupMemMute(memMuteReq);
+//        ResponseResult groupMuteRes = sdk.group.muteMembers(memMuteReq);
 //        System.out.println("groupMemMuteResult:" + groupMuteRes.toString());
 
 //        //   allow
@@ -98,7 +98,7 @@ public class GroupExample {
 //        memAllowReq.setGroupId("nE7j5Hg2U");
 //        memAllowReq.setIsAllow(1);
 //        memAllowReq.setMemberIds(List.of("mi8t76DVu"));
-//        ResponseResult groupAllowRes = sdk.group.groupMemAllow(memAllowReq);
+//        ResponseResult groupAllowRes = sdk.group.allowMembers(memAllowReq);
 //        System.out.println("groupMemAllowResult:" + groupAllowRes.toString());
 
     }

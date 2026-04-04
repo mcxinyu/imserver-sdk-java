@@ -75,7 +75,7 @@ public class TagUser {
         return result;
     }
 
-    public UserTagsResult qryUserTags(String[] userIds)throws Exception{
+    public UserTagsResult queryUserTags(String[] userIds)throws Exception{
         if(userIds.length<=0){
             return new UserTagsResult(1002, "Paramer 'user_id' is required",null);
         }
@@ -98,4 +98,5 @@ public class TagUser {
         }
         return result;
     }
+
 }

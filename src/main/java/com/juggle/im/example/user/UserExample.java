@@ -45,7 +45,7 @@ public class UserExample {
         // query user status
         UserStatus query = new UserStatus();
         query.setUserIds(new String[]{"testuser-01", "ImgEatRGU"});
-        UserStatusResult userStatusResult = sdk.user.qryOnlineStatusByUserIds(query);
+        UserStatusResult userStatusResult = sdk.user.queryOnlineStatusByUserIds(query);
         System.out.println("userStatusResult: " + userStatusResult.toString());
 
 //        // block users
@@ -67,7 +67,7 @@ public class UserExample {
         blockUserQry.setUserId("testuser-01");
         blockUserQry.setLimit(10);
         blockUserQry.setOffset(1);
-        BlockUsersResult blockUserResult = sdk.user.userBlock.qryBlockUsers(blockUserQry);
+        BlockUsersResult blockUserResult = sdk.user.userBlock.queryBlockUsers(blockUserQry);
         System.out.println("blockResult: " + blockUserResult.toString());
 
 
