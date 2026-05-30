@@ -14,7 +14,7 @@
         For improving the efficiency of developers, JuggleIM provides an open source IM Server SDK officially.
         With this SDK, you can get token, send messages, add sensitive words, ban user, manage group, create chat room and so on.
   </description>
-  <url>http://github.com/juggleim/imserver-sdk-java</url>
+  <url>https://github.com/juggleim/imserver-sdk-java</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -59,7 +59,7 @@
     <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.6</version>
+        <version>3.18.0</version>
     </dependency>
     <dependency>
         <groupId>com.alibaba</groupId>
